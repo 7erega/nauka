@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Науковий рейтинг викладача</title>
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('.myfile').on("click", setFiltrAccept);
+			$('.myfile').change(checkFile);
+			$(".upload").on("click", attachmentFile);
+		});
+	</script>
+</head>
+
+<body>
+<input type="hidden" name="userId" value="777" />
+			<div class="status button_container" data-id="123"></div>
+			<div class="button_container">
+				<input type="hidden" class="filetype" name="filetype" value="jpg, gif,    png" data-id="123"/>
+				<input type="hidden" class="maxfilesize" name="maxfilesize" value="8" data-id="123" />
+				<label class="button">Файл<input type="file" class="myfile" name="myfile" data-id="123"/></label>
+				<label class="button">Завантажити<input type="button" class="upload" value="upload" data-id="123" /></label>
+				<a href="#" class="quickbox button" style="display: none" data-file="123">Переглянути</a>	
+			</div>
+			<div class="progressBar">
+				<progress class="pBar" min="0" max="100" value="0" id="prog" style="display: none" data-id="123">
+					0% complete
+				</progress>
+			</div>
+		
+
+</body>
+</html>
