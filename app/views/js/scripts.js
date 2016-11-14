@@ -46,10 +46,14 @@ $('document').ready(function() {
             success: function(data) {
                 $("#signup").val('зареєструватися');
 
-                if(data) {
+                if(data.errors[0]) {
                     $("#error").fadeIn(1000, function() {
-                        $("#error").html('<div class="alert alert-danger"><span class="glyphicon glyphicon-info-sign"></span>'+data+'</div>');
+                        $("#error").html('<div class="alert alert-danger"><span class="glyphicon glyphicon-info-sign"></span>'+data.errors[0]+'</div>');
                     });
+                }
+
+                if(data.user_role[0]) {
+                    location.href = data.user_role[0];
                 }
             }
         });
@@ -93,14 +97,16 @@ $('document').ready(function() {
             },
             success: function(data) {
                 $("#login").val('увійти');
-                alert(data);
-                if(data) {
+
+                if(data.errors[0]) {
                     $("#error").fadeIn(1000, function() {
-                        $("#error").html('<div class="alert alert-danger"><span class="glyphicon glyphicon-info-sign"></span> '+data+' </div>');
+                        $("#error").html('<div class="alert alert-danger"><span class="glyphicon glyphicon-info-sign"></span> '+data.errors[0]+' </div>');
                     });
                 }
 
-                //location.href = '/teach/index';
+                if(data.user_role[0]) {
+                    location.href = data.user_role[0];
+                }
             }
         });
         return false;
