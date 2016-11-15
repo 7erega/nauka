@@ -8,7 +8,7 @@
                 </div>
                 <div class="form">
                     <h2>Увійти</h2>
-                    <form id="log" action="main/auth" method="post">
+                    <form id="log">
                         <div id="error"></div>
                         <input type="email" name="user_email" placeholder="E-mail" required=" ">
                         <input type="password" name="user_password" placeholder="Пароль" required=" ">

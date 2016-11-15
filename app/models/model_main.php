@@ -11,8 +11,6 @@ class Model_Main extends Model {
 
     public function get_data() { //отримання даних з бази (авторизація)
 
-        session_start();
-
         $this->db->connect(); //підключаємось до бд
 
         $data = $_POST;
@@ -23,8 +21,7 @@ class Model_Main extends Model {
 
             if($user) { //якщо такий користувач існує
                 if(md5(md5($data['user_password'])) == $user->user_password) { //і паролі збігаються
-                    $_SESSION['logged_user'] = $user->user_email; //створюємо комірку в сесії
-                    $this->user_role($user->user_role); //перенаправляємо на відповідну сторінку
+                    $this->set_session($user);
                 } else {
                     $this->json['errors'][] = 'Ви ввели неправильний пароль!';
                 }
@@ -71,8 +68,7 @@ class Model_Main extends Model {
                 $user->user_role = $data['user_role'];
                 R::store($user);
 
-                $_SESSION['logged_user'] = trim($data['user_email']);
-                $this->user_role($data['user_role']); //перенаправляємо на відповідну сторінку
+                $this->set_session($user);
             } else { //якщо є помилки відправляємо їх в браузер
                 header('Content-Type: application/json');
                 echo json_encode($this->json);
@@ -80,7 +76,18 @@ class Model_Main extends Model {
         }
     }
 
-    private function user_role($value = '') { //перенаправлення користувача в залежності від ролі
+    public function find_user($value) {
+        $this->db->connect();
+        return R::findOne('users', 'id = ?', array($value));
+    }
+
+    private function set_session($user) {
+        $_SESSION['logged_user'] = $user->id; //створюємо комірку в сесії
+        $user_role_headers = $this->user_role($user->user_role); //перенаправляємо на відповідну сторінку
+        $this->auth_headers($user_role_headers);
+    }
+
+    public function user_role($value = '') { //перенаправлення користувача в залежності від ролі
         switch($value) {
             case 'teach':
                 $this->json['user_role'][0] = '/teach/index';
@@ -106,8 +113,17 @@ class Model_Main extends Model {
             default: $this->json['user_role'][0] = '/main/index';
         }
 
+        return $this->json;
+    }
+
+    private function auth_headers($value) {
         header('Content-Type: application/json');
-        echo json_encode($this->json);
+        echo json_encode($value);
+        exit();
+    }
+
+    public function home_headers($value) {
+        header('Location: http://'.$_SERVER["HTTP_HOST"].$value["user_role"][0].'');
         exit();
     }
 }

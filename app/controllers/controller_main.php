@@ -7,13 +7,20 @@
 
 class Controller_Main extends Controller {
 
+    public $find_user;
+
     function __construct() {
         $this->model = new Model_Main();
         $this->view = new View;
     }
 
     function action_index() {
-        $this->view->generate('main_view.php', 'template_view.php');
+        if(isset($_SESSION['logged_user'])) {
+            $this->find_user = $this->model->find_user($_SESSION['logged_user']);
+            $user_role_headers = $this->model->user_role($this->find_user->user_role);
+            $this->model->home_headers($user_role_headers);
+        } else
+            $this->view->generate('main_view.php', 'template_view.php');
     }
 
     function action_auth() {
@@ -25,7 +32,7 @@ class Controller_Main extends Controller {
     }
 
     function action_logout() {
-        unset($_SESSION['logged_user']);
-        header('Location: /');
+        session_destroy();
+        header('Location: http://'.$_SERVER["HTTP_HOST"].'/');
     }
 }
