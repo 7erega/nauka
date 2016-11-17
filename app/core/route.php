@@ -15,7 +15,7 @@ class Route {
 
         //отримуємо ім`я контролера
         if(!empty($routes[1])) {
-            $controller_name = $routes[1];
+            $controller_name = ucfirst($routes[1]);
         }
 
         //оримуємо ім`я екшена
@@ -48,8 +48,6 @@ class Route {
 
             if(method_exists($controller, $action)) {
                 $controller->$action();
-            } else {
-                Route::ErrorPage404();
             }
         } else {
             Route::ErrorPage404();

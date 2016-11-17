@@ -1,0 +1,23 @@
+/* Basic */
+
+	body {
+		background-image: url("/app/views/img/bg.jpg");
+		background-size: cover;
+		-ms-behavior: url("/app/views/js/libs/ie/backgroundsize.min.htc");
+	}
+
+/* Section/Article */
+
+	section > .last-child, section.last-child, article > .last-child, article.last-child {
+		margin-bottom: 0;
+	}
+
+/* Nav */
+
+	#nav a span {
+		display: none !important;
+	}
+
+	#nav a:before {
+		font-size: 1.75em;
+	}

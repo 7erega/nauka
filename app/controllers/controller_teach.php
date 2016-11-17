@@ -3,7 +3,7 @@
 class Controller_Teach extends Controller {
 
     function __construct() {
-        $this->model = new Model();
+        $this->model = new Model_Teach();
         $this->view = new View();
     }
 
