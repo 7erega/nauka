@@ -18,7 +18,7 @@ class Route {
             $controller_name = ucfirst($routes[1]);
         }
 
-        //оримуємо ім`я екшена
+        //оримуємо ім`я екшена(метода)
         if(!empty($routes[2])) {
             $action_name = $routes[2];
         }
@@ -54,7 +54,12 @@ class Route {
         }
     }
 
-    function ErrorPage404() {
+    function ErrorPage404() { //сторінки не існує
         echo 'Error';
+    }
+
+    static function loggedUser() { //перевірка чи авторизований користувач
+        if(!isset($_SESSION['logged_user']))
+            header('Location: http://'.$_SERVER["HTTP_HOST"].'/');
     }
 }

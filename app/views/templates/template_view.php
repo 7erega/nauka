@@ -15,30 +15,17 @@
 </head>
 
 <body>
-
-    <?php
-        if($_SERVER['REQUEST_URI'] == '/') {
-            include ROOT_DIR.'/app/views/templates/'.$content_view;
-            include ROOT_DIR.'/app/views/templates/footer.php';
-    }   ?>
-
+    <?php if($_SERVER['REQUEST_URI'] == '/') include ROOT_DIR.'/app/views/templates/'.$content_view; ?>
     <div id="wrapper">
-
         <!-- Nav -->
         <?php if($_SERVER['REQUEST_URI'] != '/') include ROOT_DIR.'/app/views/templates/header.php'; ?>
-
         <!-- Main -->
         <div id="main">
-
             <?php if($_SERVER['REQUEST_URI'] != '/') include ROOT_DIR.'/app/views/templates/'.$content_view; ?>
-
         </div>
-
         <!-- Footer -->
         <?php include ROOT_DIR.'/app/views/templates/footer.php'; ?>
-
     </div>
-
     <!--[if lte IE 8]><script src="/app/views/js/libs/ie/respond.min.js"></script><![endif]-->
 </body>
 </html>

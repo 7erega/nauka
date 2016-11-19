@@ -1,6 +1,6 @@
 <nav id="nav">
-    <a href="#home" class="icon fa-home active"><span>Home</span></a>
-    <a href="#work" class="icon fa-folder"><span>Work</span></a>
-    <a href="#contact" class="icon fa-envelope"><span>Contact</span></a>
-    <a href="#" class="icon fa-twitter"><span>Twitter</span></a>
+    <a href="/" class="icon fa-home active"><span>Головна</span></a>
+    <a href="#" class="icon fa-folder"><span>Мій профіль</span></a>
+    <a href="#" class="icon fa-envelope"><span>Наукова діяльність</span></a>
+    <a href="/main/logout" class="icon fa-twitter"><span>Вийти</span></a>
 </nav>

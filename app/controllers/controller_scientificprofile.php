@@ -3,6 +3,7 @@
 class Controller_Scientificprofile extends Controller {
 
     function __construct() {
+        Route::loggedUser();
         $this->model = new Model_Scientificprofile();
         $this->view = new View();
     }
